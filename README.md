@@ -88,7 +88,7 @@ ReactDOM.render(<obj.element />, document.getElementById("app"))
 
 ## API
 
-`redux_bracelet`的返回值有:
+`redux_bracelet`的返回值是:
 
 - store: redux 的 store
 - getState: 获得组件内数据的函数
@@ -96,7 +96,7 @@ ReactDOM.render(<obj.element />, document.getElementById("app"))
 - event: 事件生成器生成的事件对象
 - element: 用于渲染的JSX元素
 
-使用这些返回值, 也可以在组件外修改元素的数据, 组件也会重新渲染.
+使用这些返回值, 也可以在组件外调用组件内的事件, 修改元素的数据, 做任何你想做的事.
 
 你可以只使用一个`redux_bracelet`构造一个页面.
 
