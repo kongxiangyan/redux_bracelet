@@ -6,6 +6,12 @@
 
 [示例源码](https://github.com/lsby/redux_bracelet/blob/main/demo/demo_01.html)
 
+## 安装
+
+```shell
+npm i @lsby/redux_bracelet
+```
+
 ## 概念介绍
 
 一个组件由三个部分组成:
@@ -94,7 +100,7 @@ ReactDOM.render(<obj.element />, document.getElementById("app"))
 - getState: 获得组件内数据的函数
 - setState: 设置组件内数据的函数
 - event: 事件生成器生成的事件对象
-- element: 用于渲染的JSX元素
+- element: 组件的JSX元素
 
 使用这些返回值, 也可以在组件外调用组件内的事件, 修改元素的数据, 做任何你想做的事.
 
