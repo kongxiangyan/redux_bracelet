@@ -58,6 +58,7 @@
             },
             add() {
                 var data = getDate()
+                if (data.inputValue == '') { return }
                 data = R.set(R.lensProp('list'), R.append(data.inputValue, data.list), data)
                 data = R.set(R.lensProp('inputValue'), '', data)
                 setDate(data)
