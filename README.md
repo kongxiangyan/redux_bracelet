@@ -2,9 +2,9 @@
 
 ## 示例
 
-[示例]()
+[示例](https://lsby.github.io/redux_bracelet/demo/demo_01.html)
 
-[这个示例的源码]()
+[示例源码](https://github.com/lsby/redux_bracelet/blob/main/demo/demo_01.html)
 
 ## 概念介绍
 
@@ -82,9 +82,9 @@ var obj = redux_bracelet(layout, data, event)
 ReactDOM.render(<obj.element />, document.getElementById("app"))
 ```
 
-完整的效果在[这里]()
+完整效果在[这里](https://lsby.github.io/redux_bracelet/demo/demo_00.html)
 
-源码在[这里]()
+完整源码在[这里](https://github.com/lsby/redux_bracelet/blob/main/demo/demo_00.html)
 
 ## API
 
