@@ -15,20 +15,17 @@
 </body>
 
 <script>
-    function define(require, exports) {
-        var obj = {}
-        exports(name => {
-            if (name == 'react') return window.React
-            if (name == 'redux') return window.Redux
-            if (name == 'react-redux') return window.ReactRedux
-        }, obj)
-        window.redux_bracelet = obj.default
+    var require = name => {
+        if (name == 'react') return window.React
+        if (name == 'redux') return window.Redux
+        if (name == 'react-redux') return window.ReactRedux
     }
-    define.amd = true
+    var exports = {}
 </script>
 <script src="../dist/index.js"></script>
 
 <script type="text/babel">
+    var redux_bracelet = exports.default
     function layout(data, event) {
         return <div>
             <div>
