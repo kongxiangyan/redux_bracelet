@@ -8,11 +8,11 @@
 
 但又想用到各种为 react 写的 ui 库.
 
-于是封装了一下, 使用非常简单, 只需要输入布局数据和事件, 就可以做成一个模块.
+于是封装了一下, 使用非常简单, 模块由 布局-数据-事件 组成.
 
-模块内事件可以修改数据, 模块外, 也可以随意的调用事件, 修改数据, 实现各种设计模式.
+模块内, 可以绑定事件, 事件可以修改数据. 模块外, 也可以随意的调用模块内的事件, 访问和修改数据. 得益于 redux, 数据修改后 ui 会被重新渲染.
 
-你可以只使用它构造一个页面, 也可以使用它创建多个组件, 再用你喜欢的方式将它们关联起来.
+你可以直接使用它构造一个大页面, 也可以创建多个组件, 再用你喜欢的方式将对象关联起来, 实现各种设计模式.
 
 ## 安装
 
@@ -32,7 +32,7 @@ npm i @lsby/redux_bracelet
 
 代码在[这里](https://github.com/lsby/redux_bracelet_ts_demo)
 
-## 概念介绍
+## 使用
 
 一个组件由三个部分组成:
 
@@ -121,7 +121,7 @@ ReactDOM.render(<obj.element />, document.getElementById("app"))
 
 ## 注入
 
-`obj.element`不可以传入属性, 但就像JSX组件, 你可以写`children`, 例如:
+`obj.element`不可以传入属性, 但就像 jsx 组件, 你可以写`children`, 例如:
 
 ```js
 <obj.element>
@@ -137,7 +137,7 @@ ReactDOM.render(<obj.element />, document.getElementById("app"))
 
 ## 订阅
 
-`redux_bracelet`返回的对象中, 有一个`onChange`属性, 输入一个函数, 当组件内部数据变化时, 你将收到通知.
+`redux_bracelet`返回的对象中, 有一个`onChange`属性, 你可以输入一个函数, 当组件内部的数据变化时, 你将收到通知.
 
 效果在[这里](https://lsby.github.io/redux_bracelet/demo/demo_03.html)
 

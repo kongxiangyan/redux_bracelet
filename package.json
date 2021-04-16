@@ -1,6 +1,6 @@
 {
     "name": "@lsby/redux_bracelet",
-    "version": "0.0.11",
+    "version": "0.0.12",
     "description": "",
     "main": "dist/index.js",
     "scripts": {
