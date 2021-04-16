@@ -8,6 +8,10 @@
 
 代码在[这里](https://github.com/lsby/redux_bracelet/blob/main/demo/demo_01.html)
 
+也可以用于ts:
+
+demo在[这里](https://github.com/lsby/redux_bracelet_ts_demo)
+
 ## 安装
 
 ```shell
