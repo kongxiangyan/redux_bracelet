@@ -1,22 +1,36 @@
 # redux_bracelet
 
-## 示例
+一个 react + redux 封装
 
-一个简单的list示例:
+## 为什么
 
-效果在[这里](https://lsby.github.io/redux_bracelet/demo/demo_01.html)
+不喜欢 react, redux 的各种设定. 感觉过于复杂了.
 
-代码在[这里](https://github.com/lsby/redux_bracelet/blob/main/demo/demo_01.html)
+但又想用到各种为 react 写的 ui 库.
 
-也可以用于ts:
+于是封装了一下, 使用非常简单, 只需要输入布局数据和事件, 就可以做成一个模块.
 
-demo在[这里](https://github.com/lsby/redux_bracelet_ts_demo)
+模块内事件可以修改数据, 模块外, 也可以随意的调用事件, 修改数据, 实现各种设计模式.
+
+你可以只使用它构造一个页面, 也可以使用它创建多个组件, 再用你喜欢的方式将它们关联起来.
 
 ## 安装
 
 ```shell
 npm i @lsby/redux_bracelet
 ```
+
+## 示例
+
+一个简单的 list 示例:
+
+效果在[这里](https://lsby.github.io/redux_bracelet/demo/demo_01.html)
+
+代码在[这里](https://github.com/lsby/redux_bracelet/blob/main/demo/demo_01.html)
+
+也可以用于 TypeScript, 有完整的类型系统:
+
+代码在[这里](https://github.com/lsby/redux_bracelet_ts_demo)
 
 ## 概念介绍
 
@@ -26,7 +40,7 @@ npm i @lsby/redux_bracelet
 - 数据
 - 事件
 
-布局是jsx, 数据和事件嵌入其中.
+布局是 jsx, 数据和事件嵌入其中.
 
 组件内部发生事件时, 事件可以修改数据, 组件便会重新渲染.
 
@@ -87,12 +101,19 @@ function layout(data, event) {
 }
 ```
 
-最后, 将他们传入`redux_bracelet`函数并渲染:
+最后, 将他们传入`redux_bracelet`函数, 获得一个`redux_bracelet`对象:
 
 ```js
 var obj = redux_bracelet(layout, data, event)
+```
+
+接下来, 你可以用这个对象的`element`来进行渲染.
+
+```js
 ReactDOM.render(<obj.element />, document.getElementById("app"))
 ```
+
+也可以通过obj的其他属性来进行事件调用, 数据获取, 数据修改, 数据订阅.
 
 效果在[这里](https://lsby.github.io/redux_bracelet/demo/demo_00.html)
 
@@ -116,7 +137,7 @@ ReactDOM.render(<obj.element />, document.getElementById("app"))
 
 ## 订阅
 
-`redux_bracelet`还可以有第四个参数, 是一个函数, 当数据变化时, 这个函数会被执行.
+`redux_bracelet`返回的对象中, 有一个`onChange`属性, 输入一个函数, 当组件内部数据变化时, 你将收到通知.
 
 效果在[这里](https://lsby.github.io/redux_bracelet/demo/demo_03.html)
 
@@ -129,17 +150,11 @@ ReactDOM.render(<obj.element />, document.getElementById("app"))
 - 布局生成器: (数据, 事件) => JSX.Element
 - 初始数据: 数据定义
 - 事件生成器: (获得数据, 设置数据) => 事件定义
-- 当数据修改?: (获得数据, 设置数据) => void
 
 `redux_bracelet`的返回值是:
 
 - getState: 获得组件内数据的函数
 - setState: 设置组件内数据的函数
 - event: 事件生成器生成的事件对象
-- element: 组件的JSX元素
-
-使用这些返回值在组件外调用组件内的事件, 修改元素的数据, 做任何你想做的事.
-
-你可以只使用一个`redux_bracelet`构造一个页面.
-
-你也可以使用`redux_bracelet`创建多个组件, 再用你喜欢的方式将它们关联起来.
+- element: 组件的 jsx 元素
+- onChange: 当数据变化时执行的函数

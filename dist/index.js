@@ -17,7 +17,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importDefault(require("react"));
 var redux_1 = require("redux");
 var react_redux_1 = require("react-redux");
-function redux_bracelet(布局生成器, 初始数据, 事件生成器, 当数据修改) {
+function redux_bracelet(布局生成器, 初始数据, 事件生成器) {
+    var 当数据修改 = null;
     var 数据商店 = redux_1.createStore(function (旧数据, action) {
         if (旧数据 == null) {
             return 初始数据;
@@ -48,6 +49,9 @@ function redux_bracelet(布局生成器, 初始数据, 事件生成器, 当数�
             设置数据(__assign(__assign({}, 获得数据()), p));
             return react_1.default.createElement(react_redux_1.Provider, { store: 数据商店 },
                 react_1.default.createElement(组件, null));
+        },
+        onChange: function (回调) {
+            当数据修改 = 回调;
         }
     };
 }
