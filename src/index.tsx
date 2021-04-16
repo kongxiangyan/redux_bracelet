@@ -2,11 +2,7 @@ import React from "react"
 import { createStore } from 'redux'
 import { Provider, connect } from 'react-redux'
 
-interface 数据基类 {
-    children?: React.ReactChild
-}
-
-export default function redux_bracelet<数据定义 extends 数据基类, 事件定义>(
+export default function redux_bracelet<数据定义, 事件定义>(
     布局生成器: (数据: 数据定义, 事件: 事件定义) => JSX.Element,
     初始数据: 数据定义,
     事件生成器: (获得数据: () => 数据定义, 设置数据: (新数据: 数据定义) => void) => 事件定义,
@@ -34,7 +30,7 @@ export default function redux_bracelet<数据定义 extends 数据基类, 事件
         getState: 获得数据,
         setState: 设置数据,
         event: 事件,
-        element: (p: { children?: React.ReactChild }) => {
+        element: (p: { [P in keyof 数据定义]?: 数据定义[P] }) => {
             设置数据({ ...获得数据(), ...p })
             return <Provider store={数据商店}><组件 /></Provider>
         }
