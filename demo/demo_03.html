@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/redux/4.0.5/redux.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react-redux/7.2.2/react-redux.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/ramda/0.27.0/ramda.js"></script>
+</head>
+
+<body>
+    <div id="app"></div>
+</body>
+
+<script>
+    var require = name => {
+        if (name == 'react') return window.React
+        if (name == 'redux') return window.Redux
+        if (name == 'react-redux') return window.ReactRedux
+    }
+    var exports = {}
+</script>
+<script src="../dist/index.js"></script>
+
+<script type="text/babel">
+    var redux_bracelet = exports.default
+    function layout(data, event) {
+        return <div>
+            <div>
+                <input value={data.inputValue} onChange={event.inputChange}></input>
+            </div>
+        </div>
+    }
+
+    var data = {
+        inputValue: '',
+    }
+
+    function event(getDate, setDate) {
+        return {
+            inputChange(e) {
+                var data = getDate()
+                data = R.set(R.lensProp('inputValue'), e.target.value, data)
+                setDate(data)
+            },
+        }
+    }
+
+    var obj = redux_bracelet(layout, data, event, function (getDate, setDate) { console.log('数据更新', getDate()) })
+    ReactDOM.render(<obj.element />, document.getElementById("app"))
+</script>
+
+</html>

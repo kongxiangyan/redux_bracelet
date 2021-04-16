@@ -2,9 +2,11 @@
 
 ## 示例
 
-[示例](https://lsby.github.io/redux_bracelet/demo/demo_01.html)
+一个简单的list示例:
 
-[示例源码](https://github.com/lsby/redux_bracelet/blob/main/demo/demo_01.html)
+效果在[这里](https://lsby.github.io/redux_bracelet/demo/demo_01.html)
+
+代码在[这里](https://github.com/lsby/redux_bracelet/blob/main/demo/demo_01.html)
 
 ## 安装
 
@@ -88,21 +90,51 @@ var obj = redux_bracelet(layout, data, event)
 ReactDOM.render(<obj.element />, document.getElementById("app"))
 ```
 
-完整效果在[这里](https://lsby.github.io/redux_bracelet/demo/demo_00.html)
+效果在[这里](https://lsby.github.io/redux_bracelet/demo/demo_00.html)
 
-完整源码在[这里](https://github.com/lsby/redux_bracelet/blob/main/demo/demo_00.html)
+代码在[这里](https://github.com/lsby/redux_bracelet/blob/main/demo/demo_00.html)
+
+## 注入
+
+`obj.element`不可以传入属性, 但就像JSX组件, 你可以写`children`, 例如:
+
+```js
+<obj.element>
+    <h1>你好<h1>
+</obj.element>
+```
+
+之后你就可以在布局生成器中使用`data.children`使用它.
+
+效果在[这里](https://lsby.github.io/redux_bracelet/demo/demo_02.html)
+
+代码在[这里](https://github.com/lsby/redux_bracelet/blob/main/demo/demo_02.html)
+
+## 订阅
+
+`redux_bracelet`还可以有第四个参数, 是一个函数, 当数据变化时, 这个函数会被执行.
+
+效果在[这里](https://lsby.github.io/redux_bracelet/demo/demo_03.html)
+
+代码在[这里](https://github.com/lsby/redux_bracelet/blob/main/demo/demo_03.html)
 
 ## API
 
+`redux_bracelet`的参数是:
+
+- 布局生成器: (数据, 事件) => JSX.Element
+- 初始数据: 数据定义
+- 事件生成器: (获得数据, 设置数据) => 事件定义
+- 当数据修改?: (获得数据, 设置数据) => void
+
 `redux_bracelet`的返回值是:
 
-- store: redux 的 store
 - getState: 获得组件内数据的函数
 - setState: 设置组件内数据的函数
 - event: 事件生成器生成的事件对象
 - element: 组件的JSX元素
 
-使用这些返回值, 也可以在组件外调用组件内的事件, 修改元素的数据, 做任何你想做的事.
+使用这些返回值在组件外调用组件内的事件, 修改元素的数据, 做任何你想做的事.
 
 你可以只使用一个`redux_bracelet`构造一个页面.
 
