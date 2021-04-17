@@ -121,15 +121,15 @@ ReactDOM.render(<obj.element />, document.getElementById("app"))
 
 ## 注入
 
-`obj.element`不可以传入属性, 但就像 jsx 组件, 你可以写`children`, 例如:
+`obj.element`可以传入属性, 也可以像 jsx 一样传入`children`, 例如:
 
 ```js
-<obj.element>
+<obj.element s={'世界'}>
     <h1>你好<h1>
 </obj.element>
 ```
 
-之后你就可以在布局生成器中使用`data.children`使用它.
+之后你就可以在布局生成器中使用`data.s`, `data.children`.
 
 效果在[这里](https://lsby.github.io/redux_bracelet/demo/demo_02.html)
 

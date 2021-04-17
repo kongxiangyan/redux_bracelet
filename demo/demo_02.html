@@ -29,7 +29,7 @@
     var redux_bracelet = exports.default
     function layout(data, event) {
         return <div>
-            {data.children}
+            {data.children}{data.s}
         </div>
     }
 
@@ -40,7 +40,7 @@
     }
 
     var obj = redux_bracelet(layout, data, event)
-    ReactDOM.render(<obj.element>你好</obj.element>, document.getElementById("app"))
+    ReactDOM.render(<obj.element s={'世界'}>你好</obj.element>, document.getElementById("app"))
 </script>
 
 </html>
