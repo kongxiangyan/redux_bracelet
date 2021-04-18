@@ -10,7 +10,11 @@
 
 于是封装了一下, 使用非常简单, 模块由 布局-数据-事件 组成.
 
-模块内, 可以绑定事件, 事件可以修改数据. 模块外, 也可以随意的调用模块内的事件, 访问和修改数据. 得益于 redux, 数据修改后 ui 会被重新渲染.
+模块内, 可以绑定事件, 事件可以修改数据.
+
+模块外, 也可以随意的调用模块内的事件, 访问和修改数据.
+
+得益于 redux, 数据修改后 ui 会被重新渲染.
 
 你可以直接使用它构造一个大页面, 也可以创建多个组件, 再用你喜欢的方式将对象关联起来, 实现各种设计模式.
 
@@ -119,7 +123,7 @@ ReactDOM.render(<obj.element />, document.getElementById("app"))
 
 代码在[这里](https://github.com/lsby/redux_bracelet/blob/main/demo/demo_00.html)
 
-## 注入
+## 属性注入
 
 `obj.element`可以传入属性, 也可以像 jsx 一样传入`children`, 例如:
 
@@ -129,15 +133,27 @@ ReactDOM.render(<obj.element />, document.getElementById("app"))
 </obj.element>
 ```
 
-之后你就可以在布局生成器中使用`data.s`, `data.children`.
+之后你就可以在布局生成器中使用`data.s`和`data.children`了.
 
 效果在[这里](https://lsby.github.io/redux_bracelet/demo/demo_02.html)
 
 代码在[这里](https://github.com/lsby/redux_bracelet/blob/main/demo/demo_02.html)
 
-## 订阅
+## 事件订阅
 
-`redux_bracelet`返回的对象中, 有一个`onChange`属性, 你可以输入一个函数, 当组件内部的数据变化时, 你将收到通知.
+`redux_bracelet`返回的对象中, 你可以访问到:
+
+- 获取数据的`obj.getState`函数.
+- 设置数据的`obj.setState`函数.
+- 你自己写的事件函数, 在`obj.event`中.
+
+你可以在组件外部调用这些函数来完成`获取数据`, `设置数据`, `事件触发`.
+
+同时, 在组件内部, 也会调用这些方法以支撑组件内部逻辑.
+
+这意味着, 你可以通过`函数劫持`挂上自己的钩子, 甚至控制组件内部的运行.
+
+通过这个, 可以实现包括`数据订阅`, `事件订阅`的各种逻辑.
 
 效果在[这里](https://lsby.github.io/redux_bracelet/demo/demo_03.html)
 
@@ -145,16 +161,15 @@ ReactDOM.render(<obj.element />, document.getElementById("app"))
 
 ## API
 
-`redux_bracelet`的参数是:
+`redux_bracelet`的参数:
 
 - 布局生成器: (数据, 事件) => JSX.Element
 - 初始数据: 数据定义
 - 事件生成器: (获得数据, 设置数据) => 事件定义
 
-`redux_bracelet`的返回值是:
+`redux_bracelet`的返回值:
 
 - getState: 获得组件内数据的函数
 - setState: 设置组件内数据的函数
 - event: 事件生成器生成的事件对象
 - element: 组件的 jsx 元素
-- onChange: 当数据变化时执行的函数

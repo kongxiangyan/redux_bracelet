@@ -18,42 +18,50 @@ var react_1 = __importDefault(require("react"));
 var redux_1 = require("redux");
 var react_redux_1 = require("react-redux");
 function redux_bracelet(布局生成器, 初始数据, 事件生成器) {
-    var 当数据修改 = null;
-    var 数据商店 = redux_1.createStore(function (旧数据, action) {
-        if (旧数据 == null) {
-            return 初始数据;
+    var 对象 = /** @class */ (function () {
+        function 对象() {
+            var _this = this;
+            this.数据商店 = redux_1.createStore(function (旧数据, action) {
+                if (旧数据 == null) {
+                    return 初始数据;
+                }
+                if (action.type == '设置数据') {
+                    return action.data;
+                }
+                return 旧数据;
+            });
+            this.getState = this.数据商店.getState;
+            this.setState = function (新数据) { return _this.数据商店.dispatch({ type: '设置数据', data: 新数据 }); };
+            this.event = 事件生成器(function () { return _this.getState(); }, function (新数据) { return _this.setState(新数据); });
+            this.原始组件 = function (_a) {
+                var 数据 = _a.数据, 事件 = _a.事件;
+                return 布局生成器(数据, 事件);
+            };
+            this.组件 = react_redux_1.connect(function (商店数据, 组件数据) { return ({ 数据: 商店数据 }); }, function (设置数据, 组件数据) { return ({
+                事件: Object.keys(_this.event)
+                    .map(function (a) {
+                    var _a;
+                    return (_a = {}, _a[a] = function () {
+                        var _a;
+                        var r = [];
+                        for (var _i = 0; _i < arguments.length; _i++) {
+                            r[_i] = arguments[_i];
+                        }
+                        return (_a = _this.event)[a].apply(_a, r);
+                    }, _a);
+                })
+                    .reduce(function (s, a) { return (__assign(__assign({}, s), a)); }, {})
+            }); })(this.原始组件);
+            this.element = function (p) {
+                _this.setState(__assign(__assign({}, _this.getState()), p));
+                return react_1.default.createElement(react_redux_1.Provider, { store: _this.数据商店 },
+                    react_1.default.createElement(_this.组件, null));
+            };
         }
-        if (action.type == '设置数据') {
-            return action.data;
-        }
-        return 旧数据;
-    });
-    var 获得数据 = 数据商店.getState;
-    var 设置数据 = function (新数据) {
-        数据商店.dispatch({ type: '设置数据', data: 新数据 });
-        if (当数据修改) {
-            当数据修改(获得数据, 设置数据);
-        }
-    };
-    var 事件 = 事件生成器(获得数据, 设置数据);
-    var 原始组件 = function (_a) {
-        var 数据 = _a.数据, 事件 = _a.事件;
-        return 布局生成器(数据, 事件);
-    };
-    var 组件 = react_redux_1.connect(function (商店数据, 组件数据) { return ({ 数据: 商店数据 }); }, function (设置数据, 组件数据) { return ({ 事件: 事件 }); })(原始组件);
-    return {
-        getState: 获得数据,
-        setState: 设置数据,
-        event: 事件,
-        element: function (p) {
-            设置数据(__assign(__assign({}, 获得数据()), p));
-            return react_1.default.createElement(react_redux_1.Provider, { store: 数据商店 },
-                react_1.default.createElement(组件, null));
-        },
-        onChange: function (回调) {
-            当数据修改 = 回调;
-        }
-    };
+        return 对象;
+    }());
+    var r = new 对象();
+    return r;
 }
 exports.default = redux_bracelet;
 //# sourceMappingURL=index.js.map
