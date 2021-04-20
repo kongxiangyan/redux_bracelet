@@ -65,18 +65,18 @@ var data = {
 
 ### 事件生成器
 
-`事件生成器`是一个高阶函数, 它的参数是`(getDate, setDate)`, 返回事件的对象.
+`事件生成器`是一个高阶函数, 它的参数是`(getData, setData)`, 返回事件的对象.
 
-其中, `getDate`用来获取组件内数据, `setDate`用来设置组件内数据.
+其中, `getData`用来获取组件内数据, `setData`用来设置组件内数据.
 
 这是一个例子:
 
 ```js
-function event(getDate, setDate) {
+function event(getData, setData) {
     return {
         fun() {
-            var data = getDate()
-            setDate({ n: data.n + 1, list: [...data.list, data.n] })
+            var data = getData()
+            setData({ n: data.n + 1, list: [...data.list, data.n] })
         }
     }
 }
